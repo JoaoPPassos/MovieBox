@@ -63,6 +63,7 @@
     "jest": "^28.1.0",
     "prop-types": "^15.8.1",
     "react-test-renderer": "^18.1.0",
+    "sass": "^1.52.1",
     "webpack": "^5.72.1"
   }
 }

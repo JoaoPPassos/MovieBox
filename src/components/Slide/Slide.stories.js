@@ -11,4 +11,6 @@ const Template = (args) => <Slide {...args} />;
 
 export const Primary = Template.bind({});
 
-Primary.args = {};
+Primary.args = {
+  intervalSeconds: 2,
+};

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Icon from "../Icon/Icon";
 
 import styles from "./styles.module.scss";
@@ -6,7 +6,8 @@ import styles from "./styles.module.scss";
 const SlideContext = React.createContext();
 
 const Slide = (props) => {
-  const { children } = props;
+  const { children, intervalSeconds = 0 } = props;
+
   let subComponentList = Object.keys(Slide);
   let subComponents = subComponentList.map((key) => {
     return React.Children.map(children, (child) =>
@@ -23,6 +24,19 @@ const Slide = (props) => {
       setSlide(slide + value);
     }
   };
+
+  useEffect(() => {
+    if (intervalSeconds > 0) {
+      setTimeout(() => {
+        if (slide + 1 < subComponents.length) {
+          handleChangeSlide(1);
+        } else {
+          setSlide(0);
+          setLastSlide(0);
+        }
+      }, intervalSeconds * 1000);
+    }
+  }, [slide]);
 
   subComponents = [
     <Slide.Item
@@ -95,18 +109,23 @@ const Slide = (props) => {
     <section className={styles.Slide}>
       <SlideContext.Provider value={{ current: slide, last: lastSlide }}>
         <div className={styles.SlideItems}>
-          <div
-            className={styles.ArrowBefore}
-            onClick={() => handleChangeSlide(-1)}
-          >
-            <Icon name="arrow_forward_ios" />
-          </div>
-          <div
-            className={styles.ArrowNext}
-            onClick={() => handleChangeSlide(1)}
-          >
-            <Icon name="arrow_forward_ios" />
-          </div>
+          {intervalSeconds === 0 && (
+            <>
+              <div
+                className={styles.ArrowBefore}
+                onClick={() => handleChangeSlide(-1)}
+              >
+                <Icon name="arrow_forward_ios" />
+              </div>
+              <div
+                className={styles.ArrowNext}
+                onClick={() => handleChangeSlide(1)}
+              >
+                <Icon name="arrow_forward_ios" />
+              </div>
+            </>
+          )}
+
           {counterSlider()}
           {subComponents.map((component) => component)}
         </div>
@@ -134,7 +153,11 @@ Slide.Item = (props) => {
   };
 
   useEffect(() => {
-    handleChangeCurrentPosition(value.current);
+    if (value.current === 0) {
+      setCurrentPosition(position);
+    } else {
+      handleChangeCurrentPosition(value.current);
+    }
   }, [value]);
 
   return (
