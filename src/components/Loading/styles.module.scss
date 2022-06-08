@@ -1,0 +1,40 @@
+@use 'sass:list';
+
+$degrees: 0deg -30deg -60deg -90deg -120deg;
+$sizes: 8px 7px 6px 5px 4px;
+
+.Loading {
+  height: 50px;
+  width: 50px;
+  animation-name: rotation;
+  animation-duration: 0.8s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  display: flex;
+  justify-content: center;
+  position: relative;
+
+  @for $value from 1 through 5 {
+    .DivCircle_#{$value} {
+      position: absolute;
+      left: 20px;
+      height: 100%;
+      width: 10px;
+      transform: rotateZ(list.nth($degrees, $value));
+      .Circle {
+        height: list.nth($sizes, $value);
+        width: list.nth($sizes, $value);
+        border-radius: 10px;
+        background-color: #fff;
+      }
+    }
+    @keyframes rotation {
+      from {
+        transform: rotateZ(calc(0deg + list.nth($degrees, $value)));
+      }
+      to {
+        transform: rotateZ(calc(360deg + list.nth($degrees, $value)));
+      }
+    }
+  }
+}
