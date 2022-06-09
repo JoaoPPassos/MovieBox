@@ -19,7 +19,7 @@ const Slide = (props) => {
   const [lastSlide, setLastSlide] = useState(null);
 
   const handleChangeSlide = (value) => {
-    if (slide + value >= 0 && slide + value < subComponents.length) {
+    if (slide + value >= 0 && slide + value < subComponents[0].length) {
       setLastSlide(slide);
       setSlide(slide + value);
     }
@@ -28,7 +28,7 @@ const Slide = (props) => {
   useEffect(() => {
     if (intervalSeconds > 0) {
       setTimeout(() => {
-        if (slide + 1 < subComponents.length) {
+        if (slide + 1 < subComponents[0].length) {
           handleChangeSlide(1);
         } else {
           setSlide(0);
@@ -38,64 +38,64 @@ const Slide = (props) => {
     }
   }, [slide]);
 
-  subComponents = [
-    <Slide.Item
-      item={{
-        title: "Titulo 1",
-        imdb_score: "89",
-        synopsis:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nunc lorem, posuere eu sagittis in, vulputate sed eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Fusce rutrum felis rutrum nibh fermentum viverra. Sed efficitur felis ut eros sollicitudin, ac pellentesque sapien semper.",
-        image_src:
-          "https://i.pinimg.com/564x/11/1a/03/111a03133d14214539c96e0f657dff1a.jpg",
-      }}
-      position={0}
-    />,
-    <Slide.Item
-      item={{
-        title: "Titulo 2",
-        imdb_score: "93",
-        synopsis:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nunc lorem, posuere eu sagittis in, vulputate sed eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Fusce rutrum felis rutrum nibh fermentum viverra. Sed efficitur felis ut eros sollicitudin, ac pellentesque sapien semper.",
-        image_src: "https://images2.alphacoders.com/564/564835.jpg",
-      }}
-      position={1}
-    />,
-    <Slide.Item
-      item={{
-        title: "Titulo 3",
-        imdb_score: "64",
-        synopsis:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nunc lorem, posuere eu sagittis in, vulputate sed eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Fusce rutrum felis rutrum nibh fermentum viverra. Sed efficitur felis ut eros sollicitudin, ac pellentesque sapien semper.",
-        image_src: "https://images3.alphacoders.com/595/thumb-1920-595064.jpg",
-      }}
-      position={2}
-    />,
-    <Slide.Item
-      item={{
-        title: "Titulo 4",
-        imdb_score: "64",
-        synopsis:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nunc lorem, posuere eu sagittis in, vulputate sed eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Fusce rutrum felis rutrum nibh fermentum viverra. Sed efficitur felis ut eros sollicitudin, ac pellentesque sapien semper.",
-        image_src: "https://images3.alphacoders.com/595/thumb-1920-595064.jpg",
-      }}
-      position={3}
-    />,
-    <Slide.Item
-      item={{
-        title: "Titulo 5",
-        imdb_score: "64",
-        synopsis:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nunc lorem, posuere eu sagittis in, vulputate sed eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Fusce rutrum felis rutrum nibh fermentum viverra. Sed efficitur felis ut eros sollicitudin, ac pellentesque sapien semper.",
-        image_src: "https://images3.alphacoders.com/595/thumb-1920-595064.jpg",
-      }}
-      position={4}
-    />,
-  ];
+  // subComponents = [
+  //   <Slide.Item
+  //     item={{
+  //       title: "Titulo 1",
+  //       imdb_score: "89",
+  //       synopsis:
+  //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nunc lorem, posuere eu sagittis in, vulputate sed eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Fusce rutrum felis rutrum nibh fermentum viverra. Sed efficitur felis ut eros sollicitudin, ac pellentesque sapien semper.",
+  //       image_src:
+  //         "https://i.pinimg.com/564x/11/1a/03/111a03133d14214539c96e0f657dff1a.jpg",
+  //     }}
+  //     position={0}
+  //   />,
+  //   <Slide.Item
+  //     item={{
+  //       title: "Titulo 2",
+  //       imdb_score: "93",
+  //       synopsis:
+  //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nunc lorem, posuere eu sagittis in, vulputate sed eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Fusce rutrum felis rutrum nibh fermentum viverra. Sed efficitur felis ut eros sollicitudin, ac pellentesque sapien semper.",
+  //       image_src: "https://images2.alphacoders.com/564/564835.jpg",
+  //     }}
+  //     position={1}
+  //   />,
+  //   <Slide.Item
+  //     item={{
+  //       title: "Titulo 3",
+  //       imdb_score: "64",
+  //       synopsis:
+  //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nunc lorem, posuere eu sagittis in, vulputate sed eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Fusce rutrum felis rutrum nibh fermentum viverra. Sed efficitur felis ut eros sollicitudin, ac pellentesque sapien semper.",
+  //       image_src: "https://images3.alphacoders.com/595/thumb-1920-595064.jpg",
+  //     }}
+  //     position={2}
+  //   />,
+  //   <Slide.Item
+  //     item={{
+  //       title: "Titulo 4",
+  //       imdb_score: "64",
+  //       synopsis:
+  //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nunc lorem, posuere eu sagittis in, vulputate sed eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Fusce rutrum felis rutrum nibh fermentum viverra. Sed efficitur felis ut eros sollicitudin, ac pellentesque sapien semper.",
+  //       image_src: "https://images3.alphacoders.com/595/thumb-1920-595064.jpg",
+  //     }}
+  //     position={3}
+  //   />,
+  //   <Slide.Item
+  //     item={{
+  //       title: "Titulo 5",
+  //       imdb_score: "64",
+  //       synopsis:
+  //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nunc lorem, posuere eu sagittis in, vulputate sed eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Fusce rutrum felis rutrum nibh fermentum viverra. Sed efficitur felis ut eros sollicitudin, ac pellentesque sapien semper.",
+  //       image_src: "https://images3.alphacoders.com/595/thumb-1920-595064.jpg",
+  //     }}
+  //     position={4}
+  //   />,
+  // ];
 
   const counterSlider = () => {
     return (
       <div className={styles.Counter}>
-        {subComponents.map((comp, index) => (
+        {subComponents[0].map((comp, index) => (
           <div>
             <div className={index === slide ? styles.Selected : ""} />
             <span>{index + 1}</span>
@@ -127,14 +127,14 @@ const Slide = (props) => {
           )}
 
           {counterSlider()}
-          {subComponents.map((component) => component)}
+          {subComponents[0].map((component) => component)}
         </div>
       </SlideContext.Provider>
     </section>
   );
 };
 
-Slide.Item = (props) => {
+const Item = (props) => {
   const {
     position,
     item = { title: "", imdb_score: "", synopsis: "", image_src: "" },
@@ -163,7 +163,7 @@ Slide.Item = (props) => {
   return (
     <div
       className={styles.SlideItem}
-      key={position}
+      key={position + 1}
       style={{ transform: `translate(${currentPosition * 100}%,0%)` }}
     >
       <div className={styles.BoxShadow} />
@@ -176,5 +176,7 @@ Slide.Item = (props) => {
     </div>
   );
 };
+
+Slide.Item = Item;
 
 export default Slide;
