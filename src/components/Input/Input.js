@@ -5,7 +5,7 @@ import styles from "./styles.module.scss";
 
 const Input = (props) => {
   const {
-    value = "test",
+    value = "",
     setter,
     autocomplete = false,
     loading = false,

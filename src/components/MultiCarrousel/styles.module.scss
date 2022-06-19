@@ -1,0 +1,53 @@
+.MultiCarrousel {
+  width: 100%;
+  height: auto;
+  min-height: 80px;
+
+  .Title {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    h2 {
+      font-family: "DM Sans";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 36px;
+      line-height: 47px;
+      /* identical to box height */
+
+      color: #000000;
+    }
+
+    span {
+      font-family: "DM Sans";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 24px;
+      /* identical to box height, or 133% */
+
+      /* rose/700 */
+
+      color: #be123c;
+
+      &::after {
+        margin-left: 4px;
+        content: ("");
+        border: solid #b91c1c;
+        border-width: 0 2px 2px 0;
+        display: inline-block;
+        padding: 3px;
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+      }
+    }
+  }
+  .Carrousel {
+    height: auto;
+    gap: 80px;
+    display: flex;
+    overflow-x: auto;
+  }
+}

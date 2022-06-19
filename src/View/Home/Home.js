@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Slide, Header, Input } from "../../components";
+import { Slide, Header, Input, MultiCarrousel, Card } from "../../components";
 import Logo from "../../Assets/Images/Logo.png";
 
 import styles from "./styles.module.scss";
@@ -10,8 +10,8 @@ const Home = () => {
   return (
     <main className={styles.Home}>
       <Header>
-        <img src={Logo} />
-        <Input />
+        <img src={Logo} className={styles.Logo} />
+        <Input value={search} setter={setSearch} />
       </Header>
       <Slide intervalSeconds={5}>
         <Slide.Item
@@ -37,6 +37,50 @@ const Home = () => {
           position={1}
         />
       </Slide>
+      <section className={styles.Content}>
+        <MultiCarrousel title="Teste">
+          <Card
+            title="Nome autor"
+            type="Actor"
+            image_src="https://br.web.img2.acsta.net/c_310_420/pictures/17/02/06/17/01/343859.jpg"
+          />
+          <Card
+            title="Nome autor"
+            type="Actor"
+            image_src="https://br.web.img2.acsta.net/c_310_420/pictures/17/02/06/17/01/343859.jpg"
+          />
+          <Card
+            title="Nome autor"
+            type="Actor"
+            image_src="https://br.web.img2.acsta.net/c_310_420/pictures/17/02/06/17/01/343859.jpg"
+          />
+          <Card
+            title="Nome autor"
+            type="Actor"
+            image_src="https://br.web.img2.acsta.net/c_310_420/pictures/17/02/06/17/01/343859.jpg"
+          />
+          <Card
+            title="Nome autor"
+            type="Actor"
+            image_src="https://br.web.img2.acsta.net/c_310_420/pictures/17/02/06/17/01/343859.jpg"
+          />
+          <Card
+            title="Nome autor"
+            type="Actor"
+            image_src="https://br.web.img2.acsta.net/c_310_420/pictures/17/02/06/17/01/343859.jpg"
+          />
+          <Card
+            title="Nome autor"
+            type="Actor"
+            image_src="https://br.web.img2.acsta.net/c_310_420/pictures/17/02/06/17/01/343859.jpg"
+          />
+          <Card
+            title="Nome autor"
+            type="Actor"
+            image_src="https://br.web.img2.acsta.net/c_310_420/pictures/17/02/06/17/01/343859.jpg"
+          />
+        </MultiCarrousel>{" "}
+      </section>
     </main>
   );
 };
