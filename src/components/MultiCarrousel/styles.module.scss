@@ -49,5 +49,18 @@
     gap: 80px;
     display: flex;
     overflow-x: auto;
+
+    &::-webkit-scrollbar {
+      height: 16px;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      border: 2px solid transparent;
+      background-clip: padding-box;
+      border-radius: 12px;
+      background-color: #323438be;
+    }
   }
 }
