@@ -31,7 +31,10 @@
       /* rose/700 */
 
       color: #be123c;
-
+      cursor: pointer;
+      &:hover {
+        border-bottom: 2px solid #b91c1c;
+      }
       &::after {
         margin-left: 4px;
         content: ("");

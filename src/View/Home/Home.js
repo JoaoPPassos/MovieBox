@@ -1,11 +1,57 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Slide, Header, Input, MultiCarrousel, Card } from "../../components";
 import Logo from "../../Assets/Images/Logo.png";
 
 import styles from "./styles.module.scss";
+import { api, key } from "../../Services/api";
 
 const Home = () => {
   const [search, setSearch] = useState("");
+  const [popularMovies, setPopularMovies] = useState([]);
+  var timeoutId = null;
+
+  useEffect(() => {
+    getPopularMovies();
+  }, []);
+
+  useEffect(() => {
+    if (!!timeoutId) clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      searchMovies();
+    }, 2000);
+    console.log("executou");
+  }, [search]);
+
+  const searchMovies = async () => {
+    try {
+      const { data } = await api.get(`Search/${key}/${search}`);
+      let content = data.items.slice(0, 5);
+      getPopularMoviesPosters(content);
+    } catch (error) {}
+  };
+  useEffect(() => {
+    // if (popularMovies.length > 0) getPopularMoviesPosters();
+  }, [popularMovies]);
+  const getPopularMovies = async () => {
+    try {
+      const { data } = await api.get(`MostPopularMovies/${key}`);
+      let content = data.items.slice(0, 5);
+      getPopularMoviesPosters(content);
+    } catch (error) {}
+  };
+
+  const getPopularMoviesPosters = async (content) => {
+    try {
+      let infos = [...content];
+
+      for (var movie of infos) {
+        const { data } = await api.get(`Posters/${key}/${movie.id}`);
+        movie.poster = data.posters.find((post) => post.width > 1280);
+      }
+
+      setPopularMovies(infos);
+    } catch (error) {}
+  };
 
   return (
     <main className={styles.Home}>
@@ -14,31 +60,22 @@ const Home = () => {
         <Input value={search} setter={setSearch} />
       </Header>
       <Slide intervalSeconds={5}>
-        <Slide.Item
-          item={{
-            title: "Titulo 1",
-            imdb_score: "89",
-            synopsis:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nunc lorem, posuere eu sagittis in, vulputate sed eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Fusce rutrum felis rutrum nibh fermentum viverra. Sed efficitur felis ut eros sollicitudin, ac pellentesque sapien semper.",
-            image_src:
-              "https://i.pinimg.com/564x/11/1a/03/111a03133d14214539c96e0f657dff1a.jpg",
-          }}
-          position={0}
-        />
-        <Slide.Item
-          item={{
-            title: "Titulo 2",
-            imdb_score: "89",
-            synopsis:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nunc lorem, posuere eu sagittis in, vulputate sed eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Fusce rutrum felis rutrum nibh fermentum viverra. Sed efficitur felis ut eros sollicitudin, ac pellentesque sapien semper.",
-            image_src:
-              "https://i.pinimg.com/564x/11/1a/03/111a03133d14214539c96e0f657dff1a.jpg",
-          }}
-          position={1}
-        />
+        {popularMovies.length > 0 &&
+          popularMovies.map((item, index) => (
+            <Slide.Item
+              key={index}
+              item={{
+                title: item.title,
+                imdb_score: Number(item.imDbRating),
+                synopsis: item.crew,
+                image_src: item.poster?.link,
+              }}
+              position={index}
+            />
+          ))}
       </Slide>
       <section className={styles.Content}>
-        <MultiCarrousel title="Teste">
+        <MultiCarrousel title="Featured Movie">
           <Card
             title="Nome autor"
             type="Actor"
@@ -80,6 +117,90 @@ const Home = () => {
             image_src="https://br.web.img2.acsta.net/c_310_420/pictures/17/02/06/17/01/343859.jpg"
           />
         </MultiCarrousel>{" "}
+        <MultiCarrousel title="New Arrival">
+          <Card
+            title="Nome autor"
+            type="Actor"
+            image_src="https://br.web.img2.acsta.net/c_310_420/pictures/17/02/06/17/01/343859.jpg"
+          />
+          <Card
+            title="Nome autor"
+            type="Actor"
+            image_src="https://br.web.img2.acsta.net/c_310_420/pictures/17/02/06/17/01/343859.jpg"
+          />
+          <Card
+            title="Nome autor"
+            type="Actor"
+            image_src="https://br.web.img2.acsta.net/c_310_420/pictures/17/02/06/17/01/343859.jpg"
+          />
+          <Card
+            title="Nome autor"
+            type="Actor"
+            image_src="https://br.web.img2.acsta.net/c_310_420/pictures/17/02/06/17/01/343859.jpg"
+          />
+          <Card
+            title="Nome autor"
+            type="Actor"
+            image_src="https://br.web.img2.acsta.net/c_310_420/pictures/17/02/06/17/01/343859.jpg"
+          />
+          <Card
+            title="Nome autor"
+            type="Actor"
+            image_src="https://br.web.img2.acsta.net/c_310_420/pictures/17/02/06/17/01/343859.jpg"
+          />
+          <Card
+            title="Nome autor"
+            type="Actor"
+            image_src="https://br.web.img2.acsta.net/c_310_420/pictures/17/02/06/17/01/343859.jpg"
+          />
+          <Card
+            title="Nome autor"
+            type="Actor"
+            image_src="https://br.web.img2.acsta.net/c_310_420/pictures/17/02/06/17/01/343859.jpg"
+          />
+        </MultiCarrousel>
+        <MultiCarrousel title="Featured Casts">
+          <Card
+            title="Nome autor"
+            type="Actor"
+            image_src="https://br.web.img2.acsta.net/c_310_420/pictures/17/02/06/17/01/343859.jpg"
+          />
+          <Card
+            title="Nome autor"
+            type="Actor"
+            image_src="https://br.web.img2.acsta.net/c_310_420/pictures/17/02/06/17/01/343859.jpg"
+          />
+          <Card
+            title="Nome autor"
+            type="Actor"
+            image_src="https://br.web.img2.acsta.net/c_310_420/pictures/17/02/06/17/01/343859.jpg"
+          />
+          <Card
+            title="Nome autor"
+            type="Actor"
+            image_src="https://br.web.img2.acsta.net/c_310_420/pictures/17/02/06/17/01/343859.jpg"
+          />
+          <Card
+            title="Nome autor"
+            type="Actor"
+            image_src="https://br.web.img2.acsta.net/c_310_420/pictures/17/02/06/17/01/343859.jpg"
+          />
+          <Card
+            title="Nome autor"
+            type="Actor"
+            image_src="https://br.web.img2.acsta.net/c_310_420/pictures/17/02/06/17/01/343859.jpg"
+          />
+          <Card
+            title="Nome autor"
+            type="Actor"
+            image_src="https://br.web.img2.acsta.net/c_310_420/pictures/17/02/06/17/01/343859.jpg"
+          />
+          <Card
+            title="Nome autor"
+            type="Actor"
+            image_src="https://br.web.img2.acsta.net/c_310_420/pictures/17/02/06/17/01/343859.jpg"
+          />
+        </MultiCarrousel>
       </section>
     </main>
   );
